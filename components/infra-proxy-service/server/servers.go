@@ -21,14 +21,11 @@ func (s *Server) CreateServer(ctx context.Context, req *request.CreateServer) (*
 	ctx, cancel := context.WithCancel(ctx)
 	defer cancel()
 
+	// Validate all request fields are required
 	err := validation.New(validation.Options{
 		Target:          "server",
 		Request:         *req,
-		RequiredDefault: false,
-
-		Rules: validation.Rules{
-			"Name": []string{"required"},
-		},
+		RequiredDefault: true,
 	}).Validate()
 
 	if err != nil {
@@ -85,9 +82,17 @@ func (s *Server) GetServerByName(ctx context.Context, req *request.GetServerByNa
 	ctx, cancel := context.WithCancel(ctx)
 	defer cancel()
 
-	if req.Name == "" {
-		s.service.Logger.Debug("incomplete server request: missing server name")
-		return nil, status.Error(codes.InvalidArgument, "must supply sever name")
+	// Validate only the name field
+	err := validation.New(validation.Options{
+		Target:  "server",
+		Request: *req,
+		Rules: validation.Rules{
+			"Name": []string{"required"},
+		},
+	}).Validate()
+
+	if err != nil {
+		return nil, status.Error(codes.InvalidArgument, err.Error())
 	}
 
 	server, err := s.service.Storage.GetServerByName(ctx, req.Name)
