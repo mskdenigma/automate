@@ -93,6 +93,7 @@ func gatherInfoForNode(node backend.Node) (*manager.NodeMetadata, error) {
 			EndTime: timestamp,
 			Status:  status,
 		},
+		ManagerType: node.SourceFqdn,
 	}, nil
 }
 

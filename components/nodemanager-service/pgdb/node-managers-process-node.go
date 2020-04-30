@@ -128,7 +128,9 @@ func (db *DB) ProcessIncomingNode(node *manager.NodeMetadata) error {
 	}
 
 	var mgrType string
-	if node.ManagerId != "" {
+	if node.ManagerType != "" {
+		mgrType = node.ManagerType
+	} else if node.ManagerId != "" {
 		mgrType, err = db.SelectStr(sqlGetManagerTypeFromId, node.ManagerId)
 		if err != nil {
 			logrus.Warnf("unable to find manager for node")
