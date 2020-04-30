@@ -179,6 +179,14 @@ func ReportProfilesFromInSpecProfiles(profiles []*inspec_api.Profile, profilesSu
 				WaivedStr:  controlWaivedStr,
 			}
 
+			if control.TruncatedResults != nil {
+				minControls[i].TruncatedResults = relaxting.ESInSpecReportControlTruncatedResults{
+					Failed:  int(control.TruncatedResults.Failed),
+					Skipped: int(control.TruncatedResults.Skipped),
+					Passed:  int(control.TruncatedResults.Passed),
+				}
+			}
+
 			// In ingestion old inspec reports can come without control `waiver_data` and new ones can have `waiver_data: {}`
 			if controlWaivedStr != inspec.ControlWaivedStrNo {
 				minControls[i].WaiverData = &relaxting.ESInSpecReportControlsWaiverData{

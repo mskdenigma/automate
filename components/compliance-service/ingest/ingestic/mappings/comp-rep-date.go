@@ -316,7 +316,21 @@ var ComplianceRepDate = Mapping{
                 },
                 "status": {
                   "type": "keyword"
-                }
+                },
+                "truncated_results": {
+                  "properties": {
+										"failed": {
+											"type": "integer"
+										},
+										"skipped": {
+											"type": "integer"
+										},
+										"passed": {
+											"type": "integer"
+										}
+									},
+									"type": "object"
+								}
               },
               "type": "nested"
             },

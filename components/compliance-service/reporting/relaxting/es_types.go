@@ -116,16 +116,23 @@ type ESInSpecReportControlRefs struct {
 	Url string `json:"url"`
 }
 
+type ESInSpecReportControlTruncatedResults struct {
+	Failed  int `json:"failed"`
+	Skipped int `json:"skipped"`
+	Passed  int `json:"passed"`
+}
+
 type ESInSpecReportControl struct {
-	ID         string                            `json:"id"`
-	Impact     float32                           `json:"impact"`
-	Title      string                            `json:"title"`
-	Status     string                            `json:"status"`
-	Results    []*ESInSpecReportControlsResult   `json:"results"`
-	WaiverData *ESInSpecReportControlsWaiverData `json:"waiver_data"`
-	WaivedStr  string                            `json:"waived_str"`
-	StringTags []ESInSpecReportControlStringTags `json:"string_tags"`
-	Refs       []ESInSpecReportControlRefs       `json:"refs"`
+	ID               string                                `json:"id"`
+	Impact           float32                               `json:"impact"`
+	Title            string                                `json:"title"`
+	Status           string                                `json:"status"`
+	Results          []*ESInSpecReportControlsResult       `json:"results"`
+	WaiverData       *ESInSpecReportControlsWaiverData     `json:"waiver_data"`
+	WaivedStr        string                                `json:"waived_str"`
+	StringTags       []ESInSpecReportControlStringTags     `json:"string_tags"`
+	Refs             []ESInSpecReportControlRefs           `json:"refs"`
+	TruncatedResults ESInSpecReportControlTruncatedResults `json:"truncated_results"`
 }
 
 type ESInSpecReportProfile struct {

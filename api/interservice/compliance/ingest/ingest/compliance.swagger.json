@@ -211,6 +211,9 @@
         },
         "waiver_data": {
           "$ref": "#/definitions/chef.automate.domain.compliance.ingest.events.inspec.WaiverData"
+        },
+        "truncated_results": {
+          "$ref": "#/definitions/chef.automate.domain.compliance.ingest.events.inspec.TruncatedResults"
         }
       }
     },
@@ -425,6 +428,23 @@
         },
         "platform": {
           "type": "string"
+        }
+      }
+    },
+    "chef.automate.domain.compliance.ingest.events.inspec.TruncatedResults": {
+      "type": "object",
+      "properties": {
+        "failed": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "skipped": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "passed": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
