@@ -39,16 +39,17 @@ export class NodesListComponent implements OnInit {
       });
   }
 
+  onPageChange(event) {
+    selectors.nodesListParams["page"] = event;
+    this.store.dispatch(actions.getNodes(selectors.nodesListParams));
+  }
+
   orderFor(sortKey) {
-    const {sort, order} = this.nodesList.items;
+    const {sort, order} = this.nodesList;
     if (sortKey === sort) {
       return order;
     }
     return 'none';
-  }
-
-  trackBy(node) {
-    return node;
   }
 
   onSortToggled(event) {
@@ -57,10 +58,15 @@ export class NodesListComponent implements OnInit {
       sort = undefined;
       order = undefined;
     }
+    const params = selectors.nodesListParams
+    console.log("params", params)
+    params["sort"] = sort;
+    selectors.nodesListParams["order"] = order;
+    this.store.dispatch(actions.getNodes(selectors.nodesListParams));
+  }
 
-    const queryParams = {sort, order};
-
-    this.router.navigate([], {queryParams} );
+  trackBy(node) {
+    return node;
   }
 
   deleteNode(node) {
