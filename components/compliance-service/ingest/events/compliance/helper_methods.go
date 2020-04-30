@@ -180,7 +180,7 @@ func ReportProfilesFromInSpecProfiles(profiles []*inspec_api.Profile, profilesSu
 			}
 
 			if control.TruncatedResults != nil {
-				minControls[i].TruncatedResults = relaxting.ESInSpecReportControlTruncatedResults{
+				minControls[i].TruncatedResults = &relaxting.ESInSpecReportControlTruncatedResults{
 					Failed:  int(control.TruncatedResults.Failed),
 					Skipped: int(control.TruncatedResults.Skipped),
 					Passed:  int(control.TruncatedResults.Passed),
