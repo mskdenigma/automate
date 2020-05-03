@@ -29,7 +29,7 @@ func (s *Server) CreateServer(ctx context.Context, req *request.CreateServer) (*
 	}).Validate()
 
 	if err != nil {
-		return nil, status.Error(codes.InvalidArgument, err.Error())
+		return nil, err
 	}
 
 	server, err := s.service.Storage.StoreServer(ctx, req.Name, req.Description, req.Fqdn, req.IpAddress)
